@@ -5,7 +5,6 @@ import { TextAnalyzer } from "@/components/features/text-input/text-analyzer"
 import { sessionStorage } from "@/lib/storage/session-storage"
 import { LearningSession } from "@/lib/types"
 import { countWords } from "@/lib/utils"
-import { toast } from "sonner"
 
 export default function Home() {
   const router = useRouter()
