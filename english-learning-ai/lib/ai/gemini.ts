@@ -161,7 +161,7 @@ export const geminiService = {
    */
   async analyzeVocabulary(text: string): Promise<VocabularyItem[]> {
     try {
-      const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash-exp" })
+      const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" })
 
       const prompt = VOCABULARY_PROMPT.replace("{TEXT}", text)
       const result = await model.generateContent(prompt)
@@ -191,7 +191,7 @@ export const geminiService = {
    */
   async analyzeGrammar(text: string): Promise<GrammarPoint[]> {
     try {
-      const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash-exp" })
+      const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" })
 
       const prompt = GRAMMAR_PROMPT.replace("{TEXT}", text)
       const result = await model.generateContent(prompt)
@@ -224,7 +224,7 @@ export const geminiService = {
     grammar: GrammarPoint[]
   ): Promise<Exercise[]> {
     try {
-      const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash-exp" })
+      const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" })
 
       const vocabList = vocabulary.map((v) => v.word).join(", ")
       const grammarList = grammar.map((g) => g.structure).join(", ")
