@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { BookOpen, History, Home } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { buttonVariants } from "@/components/ui/button"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
 
@@ -30,17 +30,20 @@ export function Header() {
             const isActive = pathname === link.href
 
             return (
-              <Button
+              <Link
                 key={link.href}
-                variant={isActive ? "default" : "ghost"}
-                asChild
-                size="sm"
+                href={link.href}
+                className={cn(
+                  buttonVariants({
+                    variant: isActive ? "default" : "ghost",
+                    size: "sm",
+                  }),
+                  "flex items-center gap-2"
+                )}
               >
-                <Link href={link.href} className="flex items-center gap-2">
-                  <Icon className="h-4 w-4" />
-                  <span className="hidden sm:inline">{link.label}</span>
-                </Link>
-              </Button>
+                <Icon className="h-4 w-4" />
+                <span className="hidden sm:inline">{link.label}</span>
+              </Link>
             )
           })}
         </nav>

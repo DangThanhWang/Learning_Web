@@ -4,10 +4,10 @@ import { useEffect, useState } from "react"
 import { sessionStorage } from "@/lib/storage/session-storage"
 import { LearningSession } from "@/lib/types"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
+import { Button, buttonVariants } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { BookOpen, GraduationCap, Clock, FileText, PlayCircle, Trash2, Search } from "lucide-react"
-import { formatRelativeTime, truncateText } from "@/lib/utils"
+import { formatRelativeTime, truncateText, cn } from "@/lib/utils"
 import Link from "next/link"
 import { Input } from "@/components/ui/input"
 
@@ -97,9 +97,9 @@ export default function HistoryPage() {
                   : "Hãy phân tích văn bản tiếng Anh để bắt đầu học"}
               </p>
               {!searchQuery && (
-                <Button asChild>
-                  <Link href="/">Phân tích văn bản</Link>
-                </Button>
+                <Link href="/" className={buttonVariants()}>
+                  Phân tích văn bản
+                </Link>
               )}
             </CardContent>
           </Card>
@@ -175,17 +175,25 @@ export default function HistoryPage() {
 
                   {/* Actions */}
                   <div className="flex gap-2">
-                    <Button variant="outline" size="sm" asChild className="flex-1">
-                      <Link href={`/analysis/${session.id}`}>
-                        Xem chi tiết
-                      </Link>
-                    </Button>
-                    <Button size="sm" asChild className="flex-1 bg-gradient-to-r from-blue-600 to-purple-600">
-                      <Link href={`/practice/flashcard/${session.id}`}>
-                        <PlayCircle className="mr-2 h-4 w-4" />
-                        Học flashcard
-                      </Link>
-                    </Button>
+                    <Link
+                      href={`/analysis/${session.id}`}
+                      className={cn(
+                        buttonVariants({ variant: "outline", size: "sm" }),
+                        "flex-1"
+                      )}
+                    >
+                      Xem chi tiết
+                    </Link>
+                    <Link
+                      href={`/practice/flashcard/${session.id}`}
+                      className={cn(
+                        buttonVariants({ size: "sm" }),
+                        "flex-1 bg-gradient-to-r from-blue-600 to-purple-600"
+                      )}
+                    >
+                      <PlayCircle className="mr-2 h-4 w-4" />
+                      Học flashcard
+                    </Link>
                   </div>
                 </CardContent>
               </Card>

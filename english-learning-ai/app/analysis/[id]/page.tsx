@@ -6,13 +6,13 @@ import { sessionStorage } from "@/lib/storage/session-storage"
 import { LearningSession } from "@/lib/types"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
+import { buttonVariants } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 import { VocabularyCard } from "@/components/features/vocabulary/vocabulary-card"
 import { GrammarCard } from "@/components/features/grammar/grammar-card"
 import { ArrowLeft, BookOpen, GraduationCap, PlayCircle, Clock, FileText } from "lucide-react"
-import { formatRelativeTime, truncateText } from "@/lib/utils"
+import { formatRelativeTime, truncateText, cn } from "@/lib/utils"
 import Link from "next/link"
 
 export default function AnalysisPage() {
@@ -55,12 +55,13 @@ export default function AnalysisPage() {
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="mb-8">
-          <Button variant="ghost" asChild className="mb-4">
-            <Link href="/">
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              Quay lại
-            </Link>
-          </Button>
+          <Link
+            href="/"
+            className={cn(buttonVariants({ variant: "ghost" }), "mb-4")}
+          >
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Quay lại
+          </Link>
 
           <div className="bg-white rounded-lg shadow-sm border p-6">
             <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
@@ -92,16 +93,16 @@ export default function AnalysisPage() {
               </div>
 
               <div className="flex flex-col gap-2">
-                <Button
-                  size="lg"
-                  className="bg-gradient-to-r from-blue-600 to-purple-600"
-                  asChild
+                <Link
+                  href={`/practice/flashcard/${session.id}`}
+                  className={cn(
+                    buttonVariants({ size: "lg" }),
+                    "bg-gradient-to-r from-blue-600 to-purple-600"
+                  )}
                 >
-                  <Link href={`/practice/flashcard/${session.id}`}>
-                    <PlayCircle className="mr-2 h-5 w-5" />
-                    Bắt đầu học
-                  </Link>
-                </Button>
+                  <PlayCircle className="mr-2 h-5 w-5" />
+                  Bắt đầu học
+                </Link>
               </div>
             </div>
           </div>

@@ -5,9 +5,10 @@ import { useParams, useRouter } from "next/navigation"
 import { sessionStorage } from "@/lib/storage/session-storage"
 import { LearningSession, FlashcardDifficulty } from "@/lib/types"
 import { Flashcard } from "@/components/features/flashcard/flashcard"
-import { Button } from "@/components/ui/button"
+import { Button, buttonVariants } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { ArrowLeft, RotateCcw, CheckCircle } from "lucide-react"
+import { cn } from "@/lib/utils"
 import Link from "next/link"
 
 export default function FlashcardPracticePage() {
@@ -103,12 +104,13 @@ export default function FlashcardPracticePage() {
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="mb-8">
-          <Button variant="ghost" asChild className="mb-4">
-            <Link href={`/analysis/${session.id}`}>
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              Quay lại phân tích
-            </Link>
-          </Button>
+          <Link
+            href={`/analysis/${session.id}`}
+            className={cn(buttonVariants({ variant: "ghost" }), "mb-4")}
+          >
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Quay lại phân tích
+          </Link>
 
           <div className="text-center">
             <h1 className="text-3xl font-bold text-gray-900 mb-2">
@@ -175,15 +177,15 @@ export default function FlashcardPracticePage() {
                     <RotateCcw className="mr-2 h-5 w-5" />
                     Học lại
                   </Button>
-                  <Button
-                    size="lg"
-                    className="bg-gradient-to-r from-blue-600 to-purple-600"
-                    asChild
+                  <Link
+                    href={`/analysis/${session.id}`}
+                    className={cn(
+                      buttonVariants({ size: "lg" }),
+                      "bg-gradient-to-r from-blue-600 to-purple-600"
+                    )}
                   >
-                    <Link href={`/analysis/${session.id}`}>
-                      Xem phân tích
-                    </Link>
-                  </Button>
+                    Xem phân tích
+                  </Link>
                 </div>
               </CardContent>
             </Card>
